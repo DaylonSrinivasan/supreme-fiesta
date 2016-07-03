@@ -7,7 +7,8 @@
         echo "Testing php";
         $var = 1;
         while($var < 5){
-          echo $var . "\n";
+          echo $var;
+          <br>
           $var+=1;
         }
       ?>
@@ -17,7 +18,7 @@
         var hello = "world";
         console.log(hello);
       </script>
-        
+
 
    </body>
 </html>
