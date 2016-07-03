@@ -29,7 +29,7 @@
       style="border:1px solid #d3d3d3;" onmousedown = "mouseDown()" onmouseup="mouseUp()">
       Your browser does not support the HTML5 canvas tag.
       </canvas>
-      
+
       <script>
 
       var xpos = 0;
@@ -39,7 +39,7 @@
 
       ctx.drawImage(img, xpos, 0, 320, 320, 0, 0, 320, 320);
 
-      function mouseDown() {
+      var mouseDown = function() {
         xpos+=320;
         if(xpos>320*6)
           xpos = 0;
@@ -48,12 +48,10 @@
 
       }
 
-      function mouseUp() {
+      var mouseUp = function() {
       //do something
       }
-
-
-
+      </script>
 
    </body>
 </html>
