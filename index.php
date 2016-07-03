@@ -4,7 +4,7 @@
   <!-- dependencies -->
 
   <!--ajax-->
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 
 
   <img id="animation" width="320" height="320"
