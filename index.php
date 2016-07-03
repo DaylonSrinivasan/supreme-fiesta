@@ -4,12 +4,14 @@
    </head>
    <body> America
      <?php
-        echo "Testing php";
+        echo "Testing php ";
         $var = 1;
-        while($var < 5){
-          echo $var . "\n";
+        while($var < 6){
+          echo $var;
           $var+=1;
         }
+        <br>
+        echo "Hi Jocelyn";
       ?>
 
       <script>
@@ -17,6 +19,9 @@
         var hello = "world";
         console.log(hello);
       </script>
+
+
+
 
 
    </body>
