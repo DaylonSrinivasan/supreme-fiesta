@@ -11,7 +11,7 @@
           echo "<br>";
           $var+=1;
         }
-        echo "Hi Jocelyn";
+        echo "Hi Daylon and Jocelyn!";
       ?>
 
       <script>
