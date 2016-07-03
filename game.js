@@ -63,7 +63,7 @@ document.addEventListener("keyup", function(e) {
       movingLeft = false;
       break;
     case 'd':
-      movingRight = false;dadad
+      movingRight = false;
       break;
     case 'w':
       movingUp = false;
