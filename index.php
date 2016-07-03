@@ -8,9 +8,9 @@
         $var = 1;
         while($var < 6){
           echo $var;
+          echo "<br>";
           $var+=1;
         }
-        <br>
         echo "Hi Jocelyn";
       ?>
 
