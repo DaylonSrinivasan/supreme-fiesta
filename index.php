@@ -30,7 +30,7 @@
     $("#submit").click(function() {
       var userInput = $("#inputtext").val();
       $.ajax({
-        url:  'secret.php',
+        url:  'https://daylons-app.herokuapp.com/secret.php',
         type: 'POST',
         data: {inputtext: userInput},
         success: function(response) {
