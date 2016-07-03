@@ -34,7 +34,6 @@
         type: 'POST',
         data: {inputtext: userInput},
         success: function(response) {
-          console.log(response);
           $('#result').html(response);
         }
       });
