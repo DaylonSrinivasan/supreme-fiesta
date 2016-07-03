@@ -14,5 +14,8 @@
 
        <script type="text/javascript" src="game.js"></script>
 
+       <?php
+          echo "WASD to control"
+        ?>
    </body>
 </html>
