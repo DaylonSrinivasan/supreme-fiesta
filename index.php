@@ -7,11 +7,12 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 
 
-  <img id="animation" width="320" height="320"
-  src="fishy.png" hidden>
+  <img id="animation" width="320" height="320" src="fishy.png" hidden>
+  <img id="background" src="background.png" hidden>
 
 
-  <canvas id="myCanvas" width="800" height="800"
+
+  <canvas id="myCanvas" width="800" height="300"
   style="border:1px solid #d3d3d3;">
   Your browser does not support the HTML5 canvas tag.
   </canvas>

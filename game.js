@@ -1,15 +1,21 @@
 //constants
 IMAGE_SIZE = 320;
 MILLISECONDS_PER_FRAME = 30;
+NUM_FRAMES = 2;
 
 //initialization
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
-var img = document.getElementById("animation");
+var character = document.getElementById("animation");
+var background = document.getElementById("background");
 
-var x = 0;
-var y = 0;
+var char_x = 0;
+var char_y = 0;
+var background_x = 0;
+//background_x+=200;
+var background_y = 0;
 var movingLeft = false, movingRight = false, movingUp = false, movingDown = false;
+
 
 //variables
 var frame = 0;
@@ -35,7 +41,9 @@ function draw() {
   }
 
   //drawImage(img, imageX, imageY, width, height, canvasX, canvasY, canvasWidth, canvasHeight);
-  ctx.drawImage(img, frame*IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE, x, y, IMAGE_SIZE/2, IMAGE_SIZE/2);
+  ctx.drawImage(background, 0, 150, 400, 400, (background_x+canvas.width+canvas.width)%canvas.width, 0, 800, 800);
+  ctx.drawImage(background, 0, 150, 400, 400, (canvas.width+background_x)%canvas.width, 0, 800, 800);
+  ctx.drawImage(character, frame*IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE, char_x, char_y, IMAGE_SIZE/2, IMAGE_SIZE/2);
 
 }
 document.addEventListener("keypress", function(e){
@@ -77,25 +85,39 @@ document.addEventListener("keyup", function(e) {
 
 function updateFrame(){
   frame+=1;
-  if(frame>1)
+  if(frame>NUM_FRAMES-1)
     frame= 0;
 }
 function moveLeft() {
-  x -= 10;
+  if(char_x<canvas.width/3){
+    background_x+=2;
+  }
+  else{
+    char_x -= 10;
+  }
   updateFrame();
 }
 
 function moveRight() {
-  x+=10;
+  if(char_x>2*canvas.width/3){
+    background_x-=2;
+  }
+  else{
+    char_x+=10;
+  }
   updateFrame();
 }
 
 function moveUp() {
-  y-=10
+  if(char_y<0)
+    return;
+  char_y-=10
   updateFrame();
 }
 
 function moveDown() {
-  y+=10;
+  if(char_y+70>canvas.height)
+    return;
+  char_y+=10;
   updateFrame();
 }
