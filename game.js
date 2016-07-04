@@ -21,7 +21,6 @@ var movingLeft = false, movingRight = false, movingUp = false, movingDown = fals
 var frame = 0;
 
 setInterval(draw, MILLISECONDS_PER_FRAME);
-ctx.drawImage(img, frame*IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE, x, y, IMAGE_SIZE/2, IMAGE_SIZE/2);
 
 function draw() {
 
