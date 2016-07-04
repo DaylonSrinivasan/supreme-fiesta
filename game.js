@@ -2,6 +2,8 @@
 IMAGE_SIZE = 320;
 MILLISECONDS_PER_FRAME = 30;
 NUM_FRAMES = 2;
+BACKGROUND_WIDTH = 1920;
+BACKGROUND_HEIGHT = 1200;
 
 //initialization
 var canvas = document.getElementById("myCanvas");
@@ -40,8 +42,8 @@ function draw() {
   }
 
   //drawImage(img, imageX, imageY, width, height, canvasX, canvasY, canvasWidth, canvasHeight);
-  ctx.drawImage(background, 0, 150, 400, 400, (background_x+canvas.width+canvas.width)%canvas.width, 0, 800, 800);
-  ctx.drawImage(background, 0, 150, 400, 400, (canvas.width+background_x)%canvas.width, 0, 800, 800);
+  ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x, 0, BACKGROUND_WIDTH, canvas.height);
+  ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x+BACKGROUND_WIDTH, 0, BACKGROUND_WIDTH, canvas.height);
   ctx.drawImage(character, frame*IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE, char_x, char_y, IMAGE_SIZE/2, IMAGE_SIZE/2);
 
 }

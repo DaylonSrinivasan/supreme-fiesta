@@ -8,11 +8,11 @@
 
 
   <img id="animation" width="320" height="320" src="fishy.png" hidden>
-  <img id="background" src="background.png" hidden>
+  <img id="background" src="background2.jpg" hidden>
 
 
 
-  <canvas id="myCanvas" width="800" height="300"
+  <canvas id="myCanvas" width="2000" height="400"
   style="border:1px solid #d3d3d3;">
   Your browser does not support the HTML5 canvas tag.
   </canvas>
