@@ -77,7 +77,7 @@ document.addEventListener("keyup", function(e) {
 
 function updateFrame(){
   frame+=1;
-  if(frame>5)
+  if(frame>1)
     frame= 0;
 }
 function moveLeft() {

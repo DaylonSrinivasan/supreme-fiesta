@@ -8,7 +8,7 @@
 
 
   <img id="animation" width="320" height="320"
-  src="animation.png" hidden>
+  src="fishy.png" hidden>
 
 
   <canvas id="myCanvas" width="800" height="800"
