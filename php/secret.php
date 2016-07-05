@@ -3,7 +3,7 @@
 <?php
   $ans = $_POST['inputtext'];
   if($ans==="3fast5me")
-    echo "success";
+    echo "speed";
   else
     echo "failure";
 

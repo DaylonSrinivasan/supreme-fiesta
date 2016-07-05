@@ -10,6 +10,9 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var character = document.getElementById("animation");
 var background = document.getElementById("background");
+var score = document.getElementById("score");
+var x_distance = 0;
+var speed = 1;
 
 var char_x = 0;
 var char_y = 0;
@@ -40,6 +43,11 @@ function draw() {
   if(movingDown){
     moveDown();
   }
+  if(background_x<=-BACKGROUND_WIDTH){
+    background_x+=BACKGROUND_WIDTH;
+  }
+
+  score.innerHTML = "Score: " + x_distance/50;
 
   //drawImage(img, imageX, imageY, width, height, canvasX, canvasY, canvasWidth, canvasHeight);
   ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x, 0, BACKGROUND_WIDTH, canvas.height);
@@ -90,35 +98,39 @@ function updateFrame(){
     frame= 0;
 }
 function moveLeft() {
-  if(char_x<canvas.width/3){
-    background_x+=2;
+  if(x_distance<=0)
+    return;
+  if(char_x<canvas.width/3 && !(x_distance<=canvas.width/3)){
+    background_x+=speed*5;
   }
   else{
-    char_x -= 10;
+    char_x -=speed*5;
   }
+  x_distance-=speed*5;
   updateFrame();
 }
 
 function moveRight() {
   if(char_x>2*canvas.width/3){
-    background_x-=2;
+    background_x-=speed*5;
   }
   else{
-    char_x+=10;
+    char_x+=speed*5;
   }
+  x_distance+=speed*5;
   updateFrame();
 }
 
 function moveUp() {
   if(char_y<0)
     return;
-  char_y-=10
+  char_y-=speed*5;
   updateFrame();
 }
 
 function moveDown() {
   if(char_y+70>canvas.height)
     return;
-  char_y+=10;
+  char_y+=sped*5;
   updateFrame();
 }
