@@ -5,6 +5,7 @@ $("#submit").click(function() {
     type: 'POST',
     data: {inputtext: userInput},
     success: function(response) {
+      console.log(response);
       switch(response){
         case "speed":
           speed+=1;
