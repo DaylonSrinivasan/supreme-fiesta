@@ -5,8 +5,8 @@ $("#submit").click(function() {
     type: 'POST',
     data: {inputtext: userInput},
     success: function(response) {
-      console.log((response).text());
-      switch(response.text()){
+      console.log($(response).text());
+      switch($(response).text()){
         case "speed":
           speed+=1;
           $('#result').html("Speed activated");
