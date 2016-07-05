@@ -13,6 +13,7 @@ $("#submit").click(function() {
           break;
         case "fishheart":
           character = document.getElementById("fishheart");
+          $('#result').html("<3 activated");
           break;
         default:
           $('#result').html("Cheat Failed");
