@@ -131,6 +131,6 @@ function moveUp() {
 function moveDown() {
   if(char_y+70>canvas.height)
     return;
-  char_y+=sped*5;
+  char_y+=speed*5;
   updateFrame();
 }
