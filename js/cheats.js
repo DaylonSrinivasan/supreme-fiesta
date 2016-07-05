@@ -11,6 +11,9 @@ $("#submit").click(function() {
           speed+=1;
           $('#result').html("Speed activated");
           break;
+        case "fishheart":
+          character = document.getElementById("fishheart");
+          break;
         default:
           $('#result').html("Cheat Failed");
         break;

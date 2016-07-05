@@ -8,6 +8,7 @@
 
 
   <img id="animation" width="320" height="320" src="images/fishy.png" hidden>
+  <img id="fishheart" width="320" height="320" src="images/fishheart.png" hidden>
   <img id="background" src="images/background2.jpg" hidden>
 
 
