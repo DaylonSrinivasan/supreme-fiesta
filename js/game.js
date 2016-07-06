@@ -17,8 +17,8 @@ class Enemy {
 class Bubble {
   constructor() {
     // Bubble is shot from character's position
-    this.x = char_x + 1;
-    this.y = char_y;
+    this.x = char_x + (IMAGE_SIZE/3);
+    this.y = char_y + (IMAGE_SIZE/4);
     this.img = document.getElementById("bubble");
   }
 
