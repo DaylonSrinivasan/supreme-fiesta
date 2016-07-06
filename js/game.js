@@ -1,4 +1,3 @@
-
 //periodically call the "draw" function every MILLISECONDS_PER_FRAME
 setInterval(draw, MILLISECONDS_PER_FRAME);
 
