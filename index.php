@@ -29,7 +29,8 @@
   <br>
   <p id="result"></p>
 
-  <!-- game logic -->
+  <!-- include javascript files -->
+  <script type="text/javascript" src="js/values.js"></script>
   <script type="text/javascript" src="js/game.js"></script>
   <script type="text/javascript" src="js/cheats.js"></script>
 
