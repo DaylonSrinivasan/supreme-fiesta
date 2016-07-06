@@ -165,7 +165,7 @@ function moveLeft() {
   if(x_distance<=0)
     return;
   if(char_x<canvas.width/3 && !(x_distance<=canvas.width/3)){
-    shiftObjects("right");
+    shiftBackgroundObjects("right");
   }
   else{
     char_x -=speed*5;
