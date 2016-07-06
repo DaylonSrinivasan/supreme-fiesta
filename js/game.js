@@ -1,9 +1,11 @@
 //constants
 IMAGE_SIZE = 320;
+GIF_SIZE = 64;
 MILLISECONDS_PER_FRAME = 30;
 NUM_FRAMES = 2;
 BACKGROUND_WIDTH = 1920;
 BACKGROUND_HEIGHT = 1200;
+ENEMY_SPAWN_RATE = 100;
 
 //initialization
 var canvas = document.getElementById("myCanvas");
@@ -13,22 +15,36 @@ var background = document.getElementById("background");
 var score = document.getElementById("score");
 var x_distance = 0;
 var speed = 1;
-
 var char_x = 0;
 var char_y = 0;
 var background_x = 0;
-//background_x+=200;
 var background_y = 0;
 var movingLeft = false, movingRight = false, movingUp = false, movingDown = false;
-
-
-//variables
 var frame = 0;
+var enemyList = [];
+var enemycounter = 0;
 
+class Enemy {
+  constructor(){
+    //randomly pick either an octopus or enemyfish
+    this.img = document.getElementById(Math.random() < 0.5 ? "octopus" : "enemyfish");
+    this.x = Math.random()*canvas.width;
+    this.y = Math.random()*canvas.height;
+    }
+    move () { // This looks creepy af let's fix it okay GO
+      this.x+= Math.random() < 0.5 ? -1 : 1;
+      this.y+= Math.random() < 0.5 ? -1 : 1;
+    }
+}
 setInterval(draw, MILLISECONDS_PER_FRAME);
 
 function draw() {
 
+  enemycounter++;
+  if(enemycounter==ENEMY_SPAWN_RATE){
+    enemyList.push(new Enemy());
+    enemycounter=0;
+  }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if(movingLeft){
@@ -53,7 +69,10 @@ function draw() {
   ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x, 0, BACKGROUND_WIDTH, canvas.height);
   ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x+BACKGROUND_WIDTH, 0, BACKGROUND_WIDTH, canvas.height);
   ctx.drawImage(character, frame*IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE, char_x, char_y, IMAGE_SIZE/2, IMAGE_SIZE/2);
-
+  for(var i = 0; i < enemyList.length; i++){
+    enemyList[i].move();
+    ctx.drawImage(enemyList[i].img, 0, 0, enemyList[i].img.width, enemyList[i].img.height, enemyList[i].x, enemyList[i].y, enemyList[i].img.width/2, enemyList[i].img.height/2);
+  }
 }
 document.addEventListener("keypress", function(e){
 
@@ -69,6 +88,9 @@ document.addEventListener("keypress", function(e){
       break;
     case 's':
       movingDown = true;
+      break;
+    case 'j':
+      enemyList.push(new Enemy());
       break;
     default: break;
   }
@@ -102,6 +124,9 @@ function moveLeft() {
     return;
   if(char_x<canvas.width/3 && !(x_distance<=canvas.width/3)){
     background_x+=speed*5;
+    for(var i = 0; i < enemyList.length; i++){
+      enemyList[i].x+=speed*5;
+    }
   }
   else{
     char_x -=speed*5;
@@ -113,6 +138,9 @@ function moveLeft() {
 function moveRight() {
   if(char_x>2*canvas.width/3){
     background_x-=speed*5;
+    for(var i = 0; i < enemyList.length; i++){
+      enemyList[i].x-=speed*5;
+    }
   }
   else{
     char_x+=speed*5;

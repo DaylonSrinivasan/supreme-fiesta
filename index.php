@@ -9,6 +9,8 @@
 
   <img id="animation" width="320" height="320" src="images/fishy.png" hidden>
   <img id="fishheart" width="320" height="320" src="images/fishheart.png" hidden>
+  <img id="octopus" width="215" height="282" src="images/octopus.png" hidden>
+  <img id="enemyfish" width="150" height="256" src="images/enemyfish.png" hidden>
   <img id="background" src="images/background2.jpg" hidden>
 
 
@@ -30,7 +32,6 @@
   <!-- game logic -->
   <script type="text/javascript" src="js/game.js"></script>
   <script type="text/javascript" src="js/cheats.js"></script>
-
 
 </body>
 </html>
