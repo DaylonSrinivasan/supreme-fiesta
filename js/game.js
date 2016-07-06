@@ -20,7 +20,7 @@ class Bubble {
     // Bubble is shot from character's position
     this.x = char_x + 1;
     this.y = char_y;
-    this.img = document.getElementById("Bubble");
+    this.img = document.getElementById("bubble");
   }
 
   move () {
