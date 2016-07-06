@@ -15,6 +15,20 @@ class Enemy {
     }
 }
 
+class Bubble {
+  constructor() {
+    // Bubble is shot from character's position
+    this.x = char_x + 1;
+    this.y = char_y;
+    this.img = document.getElementById("Bubble");
+  }
+
+  move () {
+    // Bubble moves constantly to the right
+    this.x += 10;
+  }
+}
+
 //called periodically every MILLISECONDS_PER_FRAME milliseconds
 function draw() {
 
@@ -64,6 +78,15 @@ function draw() {
     enemyList[i].move();
     ctx.drawImage(enemyList[i].img, 0, 0, enemyList[i].img.width, enemyList[i].img.height, enemyList[i].x, enemyList[i].y, enemyList[i].img.width/2, enemyList[i].img.height/2);
   }
+
+  // Bubble logic
+  for(var i = 0; i < bubbleList.length; i++){
+    bubbleList[i].move();
+    ctx.drawImage(bubbleList[i].img, 0, 0, bubbleList[i].img.width,
+        bubbleList[i].img.height, bubbleList[i].x, bubbleList[i].y,
+        bubbleList[i].img.width/2, bubbleList[i].img.height/2);
+  }
+
 }
 
 //start moving
@@ -82,6 +105,8 @@ document.addEventListener("keypress", function(e){
     case 's':
       movingDown = true;
       break;
+    case 'e':
+      bubbleList.push(new Bubble());
     default: break;
   }
 });
