@@ -5,6 +5,7 @@ class Enemy {
   constructor(){
     //randomly pick either an octopus or enemyfish with 50% probability (Math.random() returns float between 0 and 1)
     this.img = document.getElementById(Math.random() < 0.5 ? "octopus" : "enemyfish");
+    this.scale = 0.5;
     this.x = Math.random()*canvas.width;
     this.y = Math.random()*canvas.height;
     this.x_vel = (Math.random() < 0.5 ? 1 : -1);
@@ -32,12 +33,15 @@ class Bubble {
     // Bubble is shot from character's position
     this.x = char_x + (CHARACTER_SIZE/2);
     this.y = char_y + (CHARACTER_SIZE/2-10);
+    this.dir = dir;
     this.img = document.getElementById("bubble");
   }
 
   move () {
-    // Bubble moves constantly to the right
-    this.x += 10;
+    if(this.dir=="right")
+      this.x += 10;
+    if(this.dir=="left")
+      this.x -= 10;
   }
 }
 
@@ -74,7 +78,7 @@ function draw() {
     background_x+=BACKGROUND_WIDTH;
   }
 
-  score.innerHTML = "Score: " + x_distance/50;
+  score.innerHTML = "Score: " + enemiesKilled*10;
 
 
   /* rotating background implemented by drawing 2 background images back to back, and rotating them forward or backward as you move */
@@ -86,7 +90,9 @@ function draw() {
   //enemy logic
   for(var i = 0; i < enemyList.length; i++){
     enemyList[i].move();
-    ctx.drawImage(enemyList[i].img, 0, 0, enemyList[i].img.width, enemyList[i].img.height, enemyList[i].x, enemyList[i].y, enemyList[i].img.width/2, enemyList[i].img.height/2);
+    ctx.drawImage(enemyList[i].img, 0, 0, enemyList[i].img.width, enemyList[i].img.height,
+      enemyList[i].x, enemyList[i].y, enemyList[i].img.width*enemyList[i].scale,
+      enemyList[i].img.height*enemyList[i].scale);
   }
 
   // Bubble logic
@@ -100,12 +106,13 @@ function draw() {
   //collision bubbles and enemies
   for(var i = 0; i < bubbleList.length; i++){
     for(var j = 0; j < enemyList.length; j++){
-      if(bubbleList[i].x>enemyList[j].x&&bubbleList[i].x<enemyList[j].x+enemyList[j].img.width
-      && bubbleList[i].y>enemyList[j].y&&bubbleList[i].y<enemyList[j].y+enemyList[j].img.height){
+      if(bubbleList[i].x>enemyList[j].x&&bubbleList[i].x<enemyList[j].x+enemyList[j].img.width*enemyList[j].scale
+      && bubbleList[i].y>enemyList[j].y&&bubbleList[i].y<enemyList[j].y+enemyList[j].img.height*enemyList[j].scale){
         bubbleList.splice(i, 1);
         enemyList.splice(j,1);
         i--;
         j--;
+        enemiesKilled++;
       }
     }
   }
@@ -160,9 +167,16 @@ document.addEventListener("keyup", function(e) {
 
 //set the character animation to the next frame
 function updateFrame(){
-  frame+=1;
-  if(frame>NUM_FRAMES-1)
-    frame= 0;
+  if(dir=="left"){
+    frame+=1;
+    if(frame>(NUM_FRAMES-1)/2)
+      frame=0;
+  }
+  if(dir=="right"){
+    frame+=1;
+    if(frame>NUM_FRAMES-1)
+      frame=2;
+    }
 }
 
 
@@ -191,6 +205,7 @@ function shiftBackgroundObjects(direction){
 
 /* move functions */
 function moveLeft() {
+  dir="left";
   if(x_distance<=0)
     return;
   if(char_x<canvas.width/3 && !(x_distance<=canvas.width/3)){
@@ -204,6 +219,7 @@ function moveLeft() {
 }
 
 function moveRight() {
+  dir="right";
   if(char_x>2*canvas.width/3){
     shiftBackgroundObjects("left");
   }

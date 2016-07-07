@@ -1,7 +1,7 @@
 //constants
 CHARACTER_SIZE = 120;
 MILLISECONDS_PER_FRAME = 30;
-NUM_FRAMES = 2;
+NUM_FRAMES = 4;
 BACKGROUND_WIDTH = 1920;
 BACKGROUND_HEIGHT = 1200;
 ENEMY_SPAWN_RATE = 100;
@@ -19,6 +19,8 @@ var char_y = 0; //y position of char on canvas
 var background_x = 0; //x coordinate to draw background image from - goes from 0 to -BACKGROUND_WIDTH
 var movingLeft = false, movingRight = false, movingUp = false, movingDown = false; //whether character is moving
 var frame = 0; //frame of the character animation
+var dir = "right";
 var enemyList = []; //list of enemies
 var enemycounter = 0; //timer to spawn enemies periodically - counts from 0 to ENEMY_SPAWN_RATE then spawns enemy and resets
 var bubbleList = []; // list of bubbles created
+var enemiesKilled = 0;
