@@ -79,7 +79,7 @@ function draw() {
   }
 
   score.innerHTML = "Score: " + enemiesKilled*10;
-
+  lives.innerHTML = "Lives: " + numLives;
 
   /* rotating background implemented by drawing 2 background images back to back, and rotating them forward or backward as you move */
 
@@ -114,6 +114,16 @@ function draw() {
         j--;
         enemiesKilled++;
       }
+    }
+  }
+
+  //collision enemy and character
+  for(var i = 0; i < enemyList.length; i++){
+    if(enemyList[i].x<char_x+CHARACTER_SIZE && enemyList[i].x+enemyList[i].img.width*enemyList[i].scale>char_x
+    &&enemyList[i].y<char_y+CHARACTER_SIZE && enemyList[i].y+enemyList[i].img.height*enemyList[i].scale>char_y){
+      numLives--;
+      enemyList.splice(i,1);
+      i--;
     }
   }
 
