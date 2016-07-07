@@ -47,91 +47,100 @@ class Bubble {
 
 //called periodically every MILLISECONDS_PER_FRAME milliseconds
 function draw() {
-  //spawns an enemy after ENEMY_SPAWN_RATE calls to draw
-  enemycounter++;
-  if(enemycounter==ENEMY_SPAWN_RATE){
-    enemyList.push(new Enemy());
-    enemycounter=0;
-  }
+
+  // Continue gameplay
+  if( !gamePaused ) {
+
+    //spawns an enemy after ENEMY_SPAWN_RATE calls to draw
+    enemycounter++;
+    if(enemycounter==ENEMY_SPAWN_RATE){
+      enemyList.push(new Enemy());
+      enemycounter=0;
+    }
 
 
-  //clear the canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  //character movement
-  if(movingLeft){
-    moveLeft();
-  }
-  if(movingRight){
-    moveRight();
-  }
-  if(movingUp){
-    moveUp();
-  }
-  if(movingDown){
-    moveDown();
-  }
+    //character movement
+    if(movingLeft){
+      moveLeft();
+    }
+    if(movingRight){
+      moveRight();
+    }
+    if(movingUp){
+      moveUp();
+    }
+    if(movingDown){
+      moveDown();
+    }
 
 
-  //reset background_x to keep background rotating (after it reaches edge, set back to 0)
-  if(background_x<=-BACKGROUND_WIDTH){
-    background_x+=BACKGROUND_WIDTH;
-  }
+    //reset background_x to keep background rotating (after it reaches edge, set back to 0)
+    if(background_x<=-BACKGROUND_WIDTH){
+      background_x+=BACKGROUND_WIDTH;
+    }
 
-  score.innerHTML = "Score: " + enemiesKilled*10;
-  lives.innerHTML = "Lives: " + numLives;
+    score.innerHTML = "Score: " + enemiesKilled*10;
+    lives.innerHTML = "Lives: " + numLives;
 
-  /* rotating background implemented by drawing 2 background images back to back, and rotating them forward or backward as you move */
+    /* rotating background implemented by drawing 2 background images back to back, and rotating them forward or backward as you move */
 
-  //drawImage(img, imageX, imageY, width, height, canvasX, canvasY, canvasWidth, canvasHeight);
-  ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x, 0, BACKGROUND_WIDTH, canvas.height);
-  ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x+BACKGROUND_WIDTH, 0, BACKGROUND_WIDTH, canvas.height);
+    //drawImage(img, imageX, imageY, width, height, canvasX, canvasY, canvasWidth, canvasHeight);
+    ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x, 0, BACKGROUND_WIDTH, canvas.height);
+    ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x+BACKGROUND_WIDTH, 0, BACKGROUND_WIDTH, canvas.height);
 
-  //enemy logic
-  for(var i = 0; i < enemyList.length; i++){
-    enemyList[i].move();
-    ctx.drawImage(enemyList[i].img, 0, 0, enemyList[i].img.width, enemyList[i].img.height,
-      enemyList[i].x, enemyList[i].y, enemyList[i].img.width*enemyList[i].scale,
-      enemyList[i].img.height*enemyList[i].scale);
-  }
+    //enemy logic
+    for(var i = 0; i < enemyList.length; i++){
+      enemyList[i].move();
+      ctx.drawImage(enemyList[i].img, 0, 0, enemyList[i].img.width, enemyList[i].img.height,
+          enemyList[i].x, enemyList[i].y, enemyList[i].img.width*enemyList[i].scale,
+          enemyList[i].img.height*enemyList[i].scale);
+    }
 
-  // Bubble logic
-  for(var i = 0; i < bubbleList.length; i++){
-    bubbleList[i].move();
-    ctx.drawImage(bubbleList[i].img, 0, 0, bubbleList[i].img.width,
-        bubbleList[i].img.height, bubbleList[i].x, bubbleList[i].y,
-        bubbleList[i].img.width/2, bubbleList[i].img.height/2);
-  }
+    // Bubble logic
+    for(var i = 0; i < bubbleList.length; i++){
+      bubbleList[i].move();
+      ctx.drawImage(bubbleList[i].img, 0, 0, bubbleList[i].img.width,
+          bubbleList[i].img.height, bubbleList[i].x, bubbleList[i].y,
+          bubbleList[i].img.width/2, bubbleList[i].img.height/2);
+    }
 
-  //collision bubbles and enemies
-  for(var i = 0; i < bubbleList.length; i++){
-    for(var j = 0; j < enemyList.length; j++){
-      if(bubbleList[i].x>enemyList[j].x&&bubbleList[i].x<enemyList[j].x+enemyList[j].img.width*enemyList[j].scale
-      && bubbleList[i].y>enemyList[j].y&&bubbleList[i].y<enemyList[j].y+enemyList[j].img.height*enemyList[j].scale){
-        bubbleList.splice(i, 1);
-        enemyList.splice(j,1);
-        i--;
-        j--;
-        enemiesKilled++;
+    //collision bubbles and enemies
+    for(var i = 0; i < bubbleList.length; i++){
+      for(var j = 0; j < enemyList.length; j++){
+        if(bubbleList[i].x>enemyList[j].x&&bubbleList[i].x<enemyList[j].x+enemyList[j].img.width*enemyList[j].scale
+            && bubbleList[i].y>enemyList[j].y&&bubbleList[i].y<enemyList[j].y+enemyList[j].img.height*enemyList[j].scale){
+          bubbleList.splice(i, 1);
+          enemyList.splice(j,1);
+          i--;
+          j--;
+          enemiesKilled++;
+        }
       }
     }
-  }
 
-  //collision enemy and character
-  for(var i = 0; i < enemyList.length; i++){
-    if(enemyList[i].x<char_x+CHARACTER_SIZE && enemyList[i].x+enemyList[i].img.width*enemyList[i].scale>char_x
-    &&enemyList[i].y<char_y+CHARACTER_SIZE && enemyList[i].y+enemyList[i].img.height*enemyList[i].scale>char_y){
-      numLives--;
-      enemyList.splice(i,1);
-      i--;
+    //collision enemy and character
+    for(var i = 0; i < enemyList.length; i++){
+      if(enemyList[i].x<char_x+CHARACTER_SIZE && enemyList[i].x+enemyList[i].img.width*enemyList[i].scale>char_x
+          &&enemyList[i].y<char_y+CHARACTER_SIZE && enemyList[i].y+enemyList[i].img.height*enemyList[i].scale>char_y){
+        numLives--;
+        enemyList.splice(i,1);
+        i--;
+      }
     }
-  }
 
-  //draw character last so it's on top
-  ctx.drawImage(character, frame*character.width/NUM_FRAMES, 0,
-    character.width/NUM_FRAMES, character.height, char_x, char_y, CHARACTER_SIZE, CHARACTER_SIZE);
+    //draw character last so it's on top
+    ctx.drawImage(character, frame*character.width/NUM_FRAMES, 0,
+        character.width/NUM_FRAMES, character.height, char_x, char_y, CHARACTER_SIZE, CHARACTER_SIZE);
 
-
+    // Game is paused
+  } else {
+    ctx.fillStyle = "blue";
+    ctx.font = "bold 50px Arial";
+    ctx.fillText("PAUSED", canvas.width/2 -100, canvas.height/2 + 25);
+  }  
 }
 
 //start moving
@@ -152,6 +161,10 @@ document.addEventListener("keypress", function(e){
       break;
     case 'e':
       bubbleList.push(new Bubble());
+      break;
+    case 'p':
+      gamePaused = !gamePaused;
+      break;
     default: break;
   }
 });

@@ -26,3 +26,4 @@ var enemyList = []; //list of enemies
 var enemycounter = 0; //timer to spawn enemies periodically - counts from 0 to ENEMY_SPAWN_RATE then spawns enemy and resets
 var bubbleList = []; // list of bubbles created
 var enemiesKilled = 0;
+var gamePaused = false;
