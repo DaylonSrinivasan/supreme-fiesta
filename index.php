@@ -7,11 +7,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 
 
-  <img id="animation" width="320" height="320" src="images/fishy.png" hidden>
-  <img id="fishheart" width="320" height="320" src="images/fishheart.png" hidden>
+  <img id="animation" width="640" height="320" src="images/fishy.png" hidden>
+  <img id="fishheart" width="640" height="320" src="images/fishheart.png" hidden>
   <img id="octopus" width="215" height="282" src="images/octopus.png" hidden>
   <img id="enemyfish" width="150" height="256" src="images/enemyfish.png" hidden>
-  <img id="bubble" width="32" height="32" src="images/bubble.png" hidden>    
+  <img id="bubble" width="32" height="32" src="images/bubble.png" hidden>
   <img id="background" src="images/background2.jpg" hidden>
 
 

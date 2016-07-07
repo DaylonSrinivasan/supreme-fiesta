@@ -7,18 +7,31 @@ class Enemy {
     this.img = document.getElementById(Math.random() < 0.5 ? "octopus" : "enemyfish");
     this.x = Math.random()*canvas.width;
     this.y = Math.random()*canvas.height;
+    this.x_vel = (Math.random() < 0.5 ? 1 : -1);
+    this.y_vel = (Math.random() < 0.5 ? 1 : -1);
     }
     move () { // This looks creepy af let's fix it okay GO
-      this.x+= Math.random() < 0.5 ? -1 : 1;
-      this.y+= Math.random() < 0.5 ? -1 : 1;
+      this.x_vel = Math.random() < 0.01 ? -1*this.x_vel : this.x_vel;
+      this.y_vel = Math.random() < 0.01 ? -1*this.y_vel : this.y_vel;
+      if(this.x<0)
+        this.x_vel=1;
+      /*if(this.x>canvas.width-img.width)
+        this.x_vel=-1;*/
+      if(this.y<0)
+        this.y_vel=1;
+      if(this.y>canvas.height-this.img.height)
+        this.y_vel=-1;
+
+      this.x+=this.x_vel;
+      this.y+=this.y_vel;
     }
 }
 
 class Bubble {
   constructor() {
     // Bubble is shot from character's position
-    this.x = char_x + (IMAGE_SIZE/3);
-    this.y = char_y + (IMAGE_SIZE/4);
+    this.x = char_x + (CHARACTER_SIZE/2);
+    this.y = char_y + (CHARACTER_SIZE/2-10);
     this.img = document.getElementById("bubble");
   }
 
@@ -30,7 +43,6 @@ class Bubble {
 
 //called periodically every MILLISECONDS_PER_FRAME milliseconds
 function draw() {
-
   //spawns an enemy after ENEMY_SPAWN_RATE calls to draw
   enemycounter++;
   if(enemycounter==ENEMY_SPAWN_RATE){
@@ -70,7 +82,6 @@ function draw() {
   //drawImage(img, imageX, imageY, width, height, canvasX, canvasY, canvasWidth, canvasHeight);
   ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x, 0, BACKGROUND_WIDTH, canvas.height);
   ctx.drawImage(background, 0, BACKGROUND_HEIGHT-canvas.height, BACKGROUND_WIDTH, canvas.height, background_x+BACKGROUND_WIDTH, 0, BACKGROUND_WIDTH, canvas.height);
-  ctx.drawImage(character, frame*IMAGE_SIZE, 0, IMAGE_SIZE, IMAGE_SIZE, char_x, char_y, IMAGE_SIZE/2, IMAGE_SIZE/2);
 
   //enemy logic
   for(var i = 0; i < enemyList.length; i++){
@@ -85,6 +96,24 @@ function draw() {
         bubbleList[i].img.height, bubbleList[i].x, bubbleList[i].y,
         bubbleList[i].img.width/2, bubbleList[i].img.height/2);
   }
+
+  //collision bubbles and enemies
+  for(var i = 0; i < bubbleList.length; i++){
+    for(var j = 0; j < enemyList.length; j++){
+      if(bubbleList[i].x>enemyList[j].x&&bubbleList[i].x<enemyList[j].x+enemyList[j].img.width
+      && bubbleList[i].y>enemyList[j].y&&bubbleList[i].y<enemyList[j].y+enemyList[j].img.height){
+        bubbleList.splice(i, 1);
+        enemyList.splice(j,1);
+        i--;
+        j--;
+      }
+    }
+  }
+
+  //draw character last so it's on top
+  ctx.drawImage(character, frame*character.width/NUM_FRAMES, 0,
+    character.width/NUM_FRAMES, character.height, char_x, char_y, CHARACTER_SIZE, CHARACTER_SIZE);
+
 
 }
 
@@ -193,7 +222,7 @@ function moveUp() {
 }
 
 function moveDown() {
-  if(char_y+70>canvas.height)
+  if(char_y+CHARACTER_SIZE>canvas.height)
     return;
   char_y+=speed*5;
   updateFrame();
