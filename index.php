@@ -19,7 +19,7 @@
 
 
 
-  <canvas id="myCanvas" width="1000" height="400"
+  <canvas id="myCanvas" style="width:100%" width="1000" height = "400">
   style="border:1px solid #d3d3d3;">
   Your browser does not support the HTML5 canvas tag.
   </canvas>
@@ -36,7 +36,9 @@
     <button style="float: right; width:15%" id="submit"> Submit </button>
   </div>
   <br>
-  <p style="float: center" id="result"></p>
+  <div>
+    <p style="float: center" id="result"></p>
+  </div>
 
   <!-- include javascript files -->
   <script type="text/javascript" src="js/values.js"></script>
