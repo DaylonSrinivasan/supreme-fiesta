@@ -159,7 +159,7 @@ document.addEventListener("keypress", function(e){
     case 's':
       movingDown = true;
       break;
-    case 'e':
+    case 32: //spacebar
       bubbleList.push(new Bubble());
       break;
     case 'p':
