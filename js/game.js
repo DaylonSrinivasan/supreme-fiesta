@@ -137,7 +137,7 @@ function draw() {
 
     // Game is paused
   } else if( gamePaused ) {
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "white";
     ctx.font = "bold 50px Arial";
     ctx.fillText("PAUSED", canvas.width/2 -100, canvas.height/2 + 25);
   }  
@@ -145,9 +145,9 @@ function draw() {
   // GAME OVER
   else{
     lives.innerHTML = "Lives: " + numLives;
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "white";
     ctx.font = "bold 50px Arial";
-    ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2 + 25);
+    ctx.fillText("GAME OVER", canvas.width/2-150, canvas.height/2 + 25);
   }
 }
 
