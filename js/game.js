@@ -49,7 +49,7 @@ class Bubble {
 function draw() {
 
   // Continue gameplay
-  if( !gamePaused ) {
+  if( !gamePaused && numLives > 0) {
 
     //spawns an enemy after ENEMY_SPAWN_RATE calls to draw
     enemycounter++;
@@ -136,11 +136,19 @@ function draw() {
         character.width/NUM_FRAMES, character.height, char_x, char_y, CHARACTER_SIZE, CHARACTER_SIZE);
 
     // Game is paused
-  } else {
+  } else if( gamePaused ) {
     ctx.fillStyle = "blue";
     ctx.font = "bold 50px Arial";
     ctx.fillText("PAUSED", canvas.width/2 -100, canvas.height/2 + 25);
   }  
+
+  // GAME OVER
+  else{
+    lives.innerHTML = "Lives: " + numLives;
+    ctx.fillStyle = "blue";
+    ctx.font = "bold 50px Arial";
+    ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2 + 25);
+  }
 }
 
 //start moving
