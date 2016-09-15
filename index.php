@@ -56,8 +56,8 @@
           <input placeholder="Enter Cheat Here" id="inputtext">
           <button id="submit"> Submit </button>
         </div>
-        <div>
-          <p style="float: center" id="result"></p>
+        <div class="form-group">
+          <h4 style="float: center" id="result"></h4>
         </div>
       </form>
 
