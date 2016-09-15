@@ -147,8 +147,28 @@ function draw() {
     lives.innerHTML = "Lives: " + numLives;
     ctx.fillStyle = "white";
     ctx.font = "bold 50px Arial";
-    ctx.fillText("GAME OVER", canvas.width/2-150, canvas.height/2 + 25);
+    ctx.fillText("GAME OVER", canvas.width/2-150, canvas.height/2);
+    ctx.font = "20px Arial";
+    ctx.fillText("Click anywhere to replay", canvas.width/2-100, canvas.height/2 + 25);
   }
+}
+
+// Restart game
+document.addEventListener("click", restartGame);
+function restartGame(event){
+  if (numLives == 0){
+    resetGame();
+  }
+}
+
+// Reset game values
+function resetGame() {
+  numLives = 3;
+  speed = 1;
+  char_x = 0;
+  char_y = 0;
+  background_x = 0;
+  enemiesKilled = 0;
 }
 
 //start moving
